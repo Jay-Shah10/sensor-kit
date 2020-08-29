@@ -16,6 +16,7 @@ def main():
 
     # calling water level.
     adc_value = waterlevel.main()
+    adc_value = adc_value/200.*100
 
     # if adc_value == 0:
     #     print("no water\n")
