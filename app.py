@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import logging
 import dht11_test
 import waterlevel
@@ -9,10 +9,14 @@ app = Flask(__name__)
 def main():
 
     # calling temperature and humidity script.
-    dht11_test.main()
+    result = dht11_test.main()
+    temperature = result.temperature
+    humidity = result.humidity
 
     # calling water level.
     adc_value = waterlevel.main()
+
+    return render_template('index.html', temperature=temperature , humidity=humidity , water_level=adc_value)
 
 
 
