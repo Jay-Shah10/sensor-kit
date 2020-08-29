@@ -11,12 +11,21 @@ def main():
     # calling temperature and humidity script.
     result = dht11_test.main()
     temperature = result.temperature
+    F = (temperature * 9/5) + 32
     humidity = result.humidity
 
     # calling water level.
     adc_value = waterlevel.main()
 
-    return render_template('index.html', temperature=temperature , humidity=humidity , water_level=adc_value)
+    # if adc_value == 0:
+    #     print("no water\n")
+    # elif adc_value>0 and adc_value<30 :
+    #     print("it is raindrop\n")
+    # elif adc_value>=30 and adc_value<200 :
+    #     print("it is water flow")
+    #     print("water level:"+str("%.1f"%(adc_value/200.*100))+"%\n")
+
+    return render_template('index.html', temperature=F , humidity=humidity , water_level=adc_value)
 
 
 
