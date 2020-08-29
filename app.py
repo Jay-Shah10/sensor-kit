@@ -1,5 +1,4 @@
 from flask import Flask
-import RPi.GPIO as GPIO
 import logging
 
 app = Flask(__name__)
