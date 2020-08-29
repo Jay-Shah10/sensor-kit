@@ -61,16 +61,16 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 def main():
          init()
          time.sleep(2)
-         print"will start detec water level\n"
+         print("will start detec water level\n")
          while True:
                   adc_value=readadc(photo_ch, SPICLK, SPIMOSI, SPIMISO, SPICS)
                   if adc_value == 0:
-                           print"no water\n"
+                           print("no water\n")
                   elif adc_value>0 and adc_value<30 :
-                           print"it is raindrop\n"
+                           print("it is raindrop\n")
                   elif adc_value>=30 and adc_value<200 :
-                           print"it is water flow"
-                           print"water level:"+str("%.1f"%(adc_value/200.*100))+"%\n"
+                           print("it is water flow")
+                           print("water level:"+str("%.1f"%(adc_value/200.*100))+"%\n")
                   #print "adc_value= " +str(adc_value)+"\n"
                   time.sleep(1)
         
