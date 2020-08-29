@@ -16,7 +16,7 @@ def main():
 
     # calling water level.
     adc_value = waterlevel.main()
-    adc_value = adc_value/200.*100
+    water_level = adc_value/200.*100
 
     # if adc_value == 0:
     #     print("no water\n")
@@ -26,7 +26,7 @@ def main():
     #     print("it is water flow")
     #     print("water level:"+str("%.1f"%(adc_value/200.*100))+"%\n")
 
-    return render_template('index.html', temperature=F , humidity=humidity , water_level=adc_value)
+    return render_template('index.html', temperature=F , humidity=humidity , water_level=water_level)
 
 
 
