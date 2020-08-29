@@ -22,12 +22,12 @@ def init():
          GPIO.setup(SPIMISO, GPIO.IN)
          GPIO.setup(SPICLK, GPIO.OUT)
          GPIO.setup(SPICS, GPIO.OUT)
-         
+
 #read SPI data from MCP3008(or MCP3204) chip,8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if ((adcnum > 7) or (adcnum < 0)):
                 return -1
-        GPIO.output(cspin, True)	
+        GPIO.output(cspin, True)
 
         GPIO.output(clockpin, False)  # start clock low
         GPIO.output(cspin, False)     # bring CS low
@@ -54,7 +54,7 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
                         adcout |= 0x1
 
         GPIO.output(cspin, True)
-        
+
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
 
@@ -64,21 +64,22 @@ def main():
          print("will start detec water level\n")
          while True:
                   adc_value=readadc(photo_ch, SPICLK, SPIMOSI, SPIMISO, SPICS)
-                  if adc_value == 0:
-                           print("no water\n")
-                  elif adc_value>0 and adc_value<30 :
-                           print("it is raindrop\n")
-                  elif adc_value>=30 and adc_value<200 :
-                           print("it is water flow")
-                           print("water level:"+str("%.1f"%(adc_value/200.*100))+"%\n")
-                  #print "adc_value= " +str(adc_value)+"\n"
+                  return adc_value
+                #   if adc_value == 0:
+                #            print("no water\n")
+                #   elif adc_value>0 and adc_value<30 :
+                #            print("it is raindrop\n")
+                #   elif adc_value>=30 and adc_value<200 :
+                #            print("it is water flow")
+                #            print("water level:"+str("%.1f"%(adc_value/200.*100))+"%\n")
+                #   #print "adc_value= " +str(adc_value)+"\n"
                   time.sleep(1)
-        
+
 
 if __name__ == '__main__':
          try:
                   main()
-                 
+
          except KeyboardInterrupt:
                   pass
 GPIO.cleanup()
