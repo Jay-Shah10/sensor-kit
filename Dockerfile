@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu
+FROM ubuntu
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt install python3 -y
