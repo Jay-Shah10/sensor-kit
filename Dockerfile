@@ -2,6 +2,7 @@ FROM arm64v8/ubuntu
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt install python3 -y
+RUN apt-get install python3-pip
 
 WORKDIR /usr/scr/app
 COPY requirements.txt ./
