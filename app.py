@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import logging
 import dht11_test
 import waterlevel
+from newrelic import agent
 
 app = Flask(__name__)
 
@@ -10,13 +11,18 @@ def main():
 
     # calling temperature and humidity script.
     result = dht11_test.main()
+
     temperature = result.temperature
     F = (temperature * 9/5) + 32
+
     humidity = result.humidity
 
+    # sending in custom parameters to New Relic.
+    agent.add_custom_parameters([("Temperature", temperature), ("Humiditiy", humidity)])
+
     # calling water level.
-    adc_value = waterlevel.main()
-    water_level = (adc_value/200.*100)
+    # adc_value = waterlevel.main()
+    # water_level = (adc_value/200.*100)
 
     # if adc_value == 0:
     #     print("no water\n")
