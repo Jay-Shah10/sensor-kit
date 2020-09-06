@@ -27,7 +27,7 @@ def main():
         #   F = (result.temprature * 9/5) + 32
         #   print("Temperature = ",F,"F"," Humidity = ",result.humidity,"%")
         return result
-        time.sleep(1)
+        time.sleep(2)
 
 # if __name__ == '__main__':
 
